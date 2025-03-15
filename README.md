@@ -1,54 +1,87 @@
-# React + TypeScript + Vite
+# Dynamic Address Selector
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React project that dynamically updates address selections based on the **Philippine Standard Geographic Code (PSGC)** API. The system allows users to select their **region, province, city/municipality, and barangay**, and upon submission, it displays the full address.
 
-Currently, two official plugins are available:
+## 📌 Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [How It Works](#how-it-works)
+- [Installation Guide](#installation-guide)
+- [Usage](#usage)
+- [Features](#features)
+- [API Reference](#api-reference)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 How It Works
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+This project leverages the **Philippine Standard Geographic Code (PSGC) API** to dynamically update the available address selections. Here's how it functions:
+
+1. **User Selection:** The user selects a region from the dropdown.
+2. **Dynamic Update:** Based on the selected region, the provinces list updates.
+3. **Further Selection:** Selecting a province updates the list of cities/municipalities.
+4. **Barangay Level:** After selecting a city/municipality, the barangay list is generated.
+5. **Submission:** Once all selections are made, submitting the form will display the full address chosen.
+
+This dynamic approach ensures accurate location selection and eliminates manual input errors.
+
+---
+
+## 🛠 Installation Guide
+
+Follow these steps to install and run the project locally:
+
+### 1️⃣ Clone the Repository
+
+```sh
+git clone https://github.com/KyneLaggui/dynamic-address.git
+cd dynamic-address
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2️⃣ Install Dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Ensure you have **Node.js** and **npm** or **yarn** installed.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```sh
+npm install  # or yarn install
 ```
+
+### 3️⃣ Start the Development Server
+
+```sh
+npm start  # or yarn start
+```
+
+The project should now be running on `http://localhost:3000/`.
+
+---
+
+## 📌 Usage
+
+1. Open the application.
+2. Select a **region** from the dropdown.
+3. Choose the corresponding **province, city/municipality, and barangay** as they dynamically update.
+4. Click **Submit** to display your full selected address.
+
+---
+
+## ✨ Features
+
+- Dynamic selection of address levels (Region ➝ Province ➝ City/Municipality ➝ Barangay).
+- Automatic fetching of location data from the **PSGC API**.
+- User-friendly dropdown interface.
+- Instant address display upon submission.
+
+---
+
+## 🌍 API Reference
+
+The project uses the **Philippine Standard Geographic Code API** for retrieving location data.
+
+- **Base URL:** `https://example-api.com/psgc`
+- **Endpoints:**
+  - `/regions` – Fetches all regions
+  - `/provinces?region_id=<id>` – Fetches provinces under a specific region
+  - `/cities?province_id=<id>` – Fetches cities/municipalities in a province
+  - `/barangays?city_id=<id>` – Fetches barangays in a city/municipality
+
+Ensure to replace `https://example-api.com/psgc` with the actual PSGC API endpoint used.
